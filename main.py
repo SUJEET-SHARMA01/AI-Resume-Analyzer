@@ -1,7 +1,9 @@
 import os
-from fastapi import FastAPI,Query
+from fastapi import FastAPI, Query, UploadFile, File
 from dotenv import load_dotenv
 from google import genai
+from pypdf import PdfReader
+from io import BytesIO
 
 load_dotenv()
 
@@ -24,3 +26,19 @@ def ask_ai(question: str = Query(...)):
         "question" : question,
         "response" : response.text
     }
+
+@app.post("/upload-resume")
+async def upload_resume(file: UploadFile = File(...)):
+    pdf = await file.read()
+    reader = PdfReader(BytesIO(pdf))
+    text = ""
+
+    for page in reader.pages:
+        text += page.extract_text() or ""
+
+    return {
+        "filename" : file.filename,
+        "content_type" : file.content_type,
+        "text" : text
+    }
+
