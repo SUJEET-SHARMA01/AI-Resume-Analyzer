@@ -1,0 +1,68 @@
+Frontend       → React
+Backend        → FastAPI
+Database       → PostgreSQL
+LLM            → OpenAI API / Gemini API
+PDF Processing → PyPDF
+Embeddings     → OpenAI Embeddings
+Vector DB      → ChromaDB or FAISS
+Authentication → JWT
+
+=> Backend structure
+ai_resume_analyzer/
+│
+├── app/
+│   ├── main.py
+│   ├── models/
+│   ├── schemas/
+│   ├── routes/
+│   │   ├── auth.py
+│   │   ├── resume.py
+│   │   ├── analysis.py
+│   │   └── chat.py
+│   ├── services/
+│   │   ├── llm_service.py
+│   │   ├── pdf_service.py
+│   │   └── embedding_service.py
+│   └── database.py
+│
+├── uploads/
+├── .env
+├── requirements.txt
+└── README.md
+
+🎯 How we'll build it
+
+Phase 1 — FastAPI
+
+Create FastAPI project
+Resume upload API
+PDF text extraction
+Store resume in database
+
+Phase 2 — GenAI
+
+Connect LLM API
+Resume summarization
+Skills extraction
+Job description analysis
+
+Phase 3 — AI Matching
+
+Resume vs Job Description
+Match percentage
+Missing skills
+Recommendations
+
+Phase 4 — RAG
+
+Convert resume into chunks
+Generate embeddings
+Store vectors
+Ask questions about the resume
+
+Phase 5 — React
+
+Upload resume
+Enter job description
+Dashboard
+AI chat interface
